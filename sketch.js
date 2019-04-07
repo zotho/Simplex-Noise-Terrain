@@ -60,6 +60,8 @@ function seedChanged() {
 }
 
 function setup() {
+  canvasWidth = windowWidth;
+  canvasHeight = windowHeight;
   canvas = createCanvas(canvasWidth, canvasHeight, WEBGL).canvas;
   setAttributes('antialias', true);
   textureNoise = createImage(textureWidth, textureHeight);
