@@ -5,16 +5,16 @@ let textureSize = 200;
 let textureWidth = textureSize,
     textureHeight = textureSize;
 
-let cellSize = 18;
+let cellSize = 18.001;
 
 let textureNoise;
 let increment = 0.08;
-let offsetX = 10,
-    offsetY = 20;
+let offsetX = 10.001,
+    offsetY = 20.001;
 // let offsetZ = 30;
-let terrainPow = 3;
+let terrainPow = 3.001;
 
-let scaleZ = 150;
+let scaleZ = 150.001;
 
 let settings = function() {
   this.cellSize = cellSize;
