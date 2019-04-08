@@ -21,8 +21,6 @@ let scaleZ = 150.5;
 let doFloor = false;
 let floorFactor = 25;
 
-let isDesktop = false;
-
 let settings = function() {
   this.cellSize = cellSize;
   this.increment = increment;
@@ -51,7 +49,7 @@ function settingsChanged() {
   floorFactor = sett.floorFactor;
 
   updateTexture();
-  drawTerrain();
+  // drawTerrain();
 }
 
 function seedChanged() {
@@ -82,11 +80,13 @@ function setup() {
   gui.close();
 
   updateTexture();
-  drawTerrain();
+  // drawTerrain();
+
+  initRotationX = rotationX;
 }
 
 function draw() {
-  updateTexture();
+  // updateTexture();
   drawTerrain();
 }
 
@@ -131,9 +131,9 @@ function drawTerrain() {
     // image(textureNoise, 0, 0, canvasWidth, canvasHeight, 0, 0, textureWidth, textureHeight);
     background(50);
     translate(0, 50, -1000);
-    rotateX(PI/6 + map(rotationX, -180, 180, -PI, PI));
+    rotateX((rotationX == null) * PI/3 + map(rotationX, -180, 180, -PI, PI));
     translate(0, mouseY, mouseY)
-    rotateZ(map(mouseX, 0, width, -HALF_PI, HALF_PI)+map(rotationZ, -180, 180, -PI, PI));
+    rotateZ(map(mouseX, 0, width, -HALF_PI, HALF_PI)+map((rotationZ | 0), -180, 180, -PI, PI));
     translate(-textureWidth*sett.cellSize/2, -textureHeight*sett.cellSize/2);
     let tex = createGraphics(textureWidth, textureHeight);
     tex.image(textureNoise, 0, 0)
