@@ -21,6 +21,9 @@ let scaleZ = 150.5;
 let doFloor = false;
 let floorFactor = 25;
 
+let centerX;
+let centerY;
+
 let settings = function() {
   this.cellSize = cellSize;
   this.increment = increment;
@@ -82,12 +85,30 @@ function setup() {
   updateTexture();
   // drawTerrain();
 
-  initRotationX = rotationX;
+  // createP(rotationX).addClass('text');
 }
 
 function draw() {
   // updateTexture();
   drawTerrain();
+
+  // if (selectAll('.text')[0]) {
+  //   selectAll('.text')[0].elt.textContent = rotationX + " | " + rotationY + " | " + rotationZ;
+  // }
+
+  let pitch = -(rotationX || 60) + 90;
+  let yaw = -rotationZ;
+
+  centerX = textureWidth * sett.cellSize/2;
+  centerY = textureHeight * sett.cellSize/2;
+
+  let radius = 1000;
+
+  let x = cos(radians(pitch)) * cos(radians(yaw)) * radius;
+  let y = cos(radians(pitch)) * sin(radians(yaw)) * radius;
+  let z = sin(radians(pitch)) * radius;
+
+  camera(x+centerX, y+centerY, z, centerX, centerY, 0, 0, 0, -1);
 }
 
 function updateTexture() {
@@ -130,11 +151,11 @@ function updateTexture() {
 function drawTerrain() {
     // image(textureNoise, 0, 0, canvasWidth, canvasHeight, 0, 0, textureWidth, textureHeight);
     background(50);
-    translate(0, 50, -1000);
-    rotateX((rotationX == null) * PI/3 + map(rotationX, -180, 180, -PI, PI));
-    translate(0, mouseY, mouseY)
-    rotateZ(map(mouseX, 0, width, -HALF_PI, HALF_PI)+map((rotationZ | 0), -180, 180, -PI, PI));
-    translate(-textureWidth*sett.cellSize/2, -textureHeight*sett.cellSize/2);
+    // translate(0, 50, -1000);
+    // rotateX((rotationX == null) * PI/3 + map(rotationX, -180, 180, -PI, PI));
+    // translate(0, mouseY, mouseY)
+    // rotateZ(map(mouseX, 0, width, -HALF_PI, HALF_PI)+map(rotationZ, -180, 180, -PI, PI));
+    // translate(-textureWidth*sett.cellSize/2, -textureHeight*sett.cellSize/2);
     let tex = createGraphics(textureWidth, textureHeight);
     tex.image(textureNoise, 0, 0)
     for (let y = 0; y < textureHeight-1; y++) {
